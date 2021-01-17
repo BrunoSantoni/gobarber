@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import CreateUserSessionService from '../services/CreateUserSessionService';
+import CreateUserSessionService from '@modules/users/services/CreateUserSessionService';
 
 const sessionsRouter = Router();
 
