@@ -1,19 +1,10 @@
 import { Router } from 'express';
 
-import CreateUserSessionService from '@modules/users/services/CreateUserSessionService';
+import SessionsController from '../controllers/SessionsController';
 
 const sessionsRouter = Router();
+const sessionsController = new SessionsController();
 
-sessionsRouter.post('/', async (req, res) => {
-  const { email, password } = req.body;
-
-  const authenticateUser = new CreateUserSessionService();
-
-  const { user, token } = await authenticateUser.run({ email, password });
-
-  delete user.password;
-
-  return res.json({ user, token });
-});
+sessionsRouter.post('/', sessionsController.create);
 
 export default sessionsRouter;
