@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 
+import { config } from 'dotenv';
+
 import cors from 'cors';
 
 import express, { Request, Response, NextFunction } from 'express';
@@ -10,6 +12,8 @@ import routes from './routes';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
+
+config();
 
 const app = express();
 
