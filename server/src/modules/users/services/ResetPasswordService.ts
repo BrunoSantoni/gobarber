@@ -38,7 +38,7 @@ class ResetPasswordService {
     }
 
     const tokenCreatedAt = userToken.createdAt;
-    const compareDate = addHours(tokenCreatedAt, 2);
+    const compareDate = addHours(tokenCreatedAt, 1);
     const tokenExpired = isAfter(Date.now(), compareDate);
 
     if (tokenExpired) {
