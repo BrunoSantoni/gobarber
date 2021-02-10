@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 
 import AppError from '@shared/errors/AppError';
 
-interface TokenPayload {
+interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
@@ -25,7 +25,7 @@ export default function ensureAuthenticated(
   try {
     const decoded = verify(token, process.env.JWT_SECRET);
 
-    const { sub } = decoded as TokenPayload;
+    const { sub } = decoded as ITokenPayload;
 
     req.user = {
       id: sub,
@@ -33,6 +33,7 @@ export default function ensureAuthenticated(
 
     return next();
   } catch (err) {
+    console.error(err);
     throw new AppError('Invalid JWT Token', 401);
   }
 }
