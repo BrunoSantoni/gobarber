@@ -9,14 +9,12 @@ class AppointmentsController {
     const userId = req.user.id;
     const { providerId, date } = req.body;
 
-    const parsedDate = parseISO(date);
-
     const createAppointment = container.resolve(CreateAppointmentService);
 
     const appointment = await createAppointment.run({
       providerId,
       userId,
-      date: parsedDate,
+      date,
     });
 
     return res.json(appointment);

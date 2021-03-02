@@ -3,6 +3,8 @@ import { inject, injectable } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
+import authConfig from '@config/auth';
+
 import User from '../infra/typeorm/entities/User';
 import IHashProvider from '../providers/HashProvider/interfaces/IHashProvider';
 
@@ -51,14 +53,11 @@ class CreateUserSessionService {
       throw new AppError('Incorrect email/password combination.', 401);
     }
 
-    const secret =
-      process.env.NODE_ENV === 'test' ? 'testSecret' : process.env.JWT_SECRET;
-    const expirationTime =
-      process.env.NODE_ENV === 'test' ? '1d' : process.env.JWT_EXPIRATION_TIME;
+    const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: expirationTime,
+      expiresIn,
     });
 
     return { user, token };

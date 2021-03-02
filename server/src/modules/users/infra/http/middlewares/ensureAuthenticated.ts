@@ -3,6 +3,8 @@ import { verify } from 'jsonwebtoken';
 
 import AppError from '@shared/errors/AppError';
 
+import authConfig from '@config/auth';
+
 interface ITokenPayload {
   iat: number;
   exp: number;
@@ -23,7 +25,7 @@ export default function ensureAuthenticated(
   const [, token] = authorization.split(' ');
 
   try {
-    const decoded = verify(token, process.env.JWT_SECRET);
+    const decoded = verify(token, authConfig.jwt.secret);
 
     const { sub } = decoded as ITokenPayload;
 
