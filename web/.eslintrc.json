@@ -36,6 +36,7 @@
     "camelcase": "off",
     "@typescript-eslint/ban-types": "off",
     "no-use-before-define": "off",
+    "import/no-duplicates": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

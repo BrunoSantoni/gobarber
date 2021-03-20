@@ -7,7 +7,7 @@ import EtherealMailProvider from './implementations/EtherealMailProvider';
 import SESMailProvider from './implementations/SESMailProvider';
 
 const providers = {
-  ethereral: container.resolve(EtherealMailProvider),
+  ethereal: container.resolve(EtherealMailProvider),
   ses: container.resolve(SESMailProvider),
 };
 
